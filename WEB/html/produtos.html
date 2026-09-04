@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Just in Time - Produtos</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+</head>
+
+<body>
+
+    <header class="header">
+
+        <div class="logo-header">
+
+            <span>JIT</span>
+
+            <div>
+
+                <h2>Just in Time</h2>
+
+                <small>
+                    Gestão de produção
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="usuario-header">
+
+            <span id="nomeUsuario">
+                Usuário
+            </span>
+
+            <button
+                id="btnLogout"
+                class="btn-logout"
+                onclick="logout()"
+            >
+                Sair
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <main class="page">
+
+        <div class="page-top">
+
+            <div>
+
+                <a
+                    href="dashboard.html"
+                    class="voltar"
+                >
+                    ← Voltar
+                </a>
+
+                <h1>
+                    Cadastro de Produtos
+                </h1>
+
+                <p>
+                    Gerencie os produtos disponíveis
+                    no estoque.
+                </p>
+
+            </div>
+
+
+            <button
+                class="btn-primary"
+                onclick="abrirModal()"
+            >
+                + Novo Produto
+            </button>
+
+        </div>
+
+
+        <section class="search-box">
+
+            <input
+                type="text"
+                id="campoBusca"
+                placeholder="🔎 Buscar produto..."
+            >
+
+            <button
+                class="btn-secondary"
+                onclick="buscarProdutos()"
+            >
+                Buscar
+            </button>
+
+        </section>
+
+
+        <section class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>Produto</th>
+
+                        <th>Descrição</th>
+
+                        <th>Custo</th>
+
+                        <th>Estoque</th>
+
+                        <th>Mínimo</th>
+
+                        <th>Ações</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="listaProdutos">
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+
+    <div
+        id="modalProduto"
+        class="modal"
+    >
+
+        <div class="modal-content">
+
+
+            <div class="modal-header">
+
+                <h2 id="tituloModal">
+                    Novo Produto
+                </h2>
+
+                <button
+                    onclick="fecharModal()"
+                    class="fechar"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <form id="produtoForm">
+
+                <input
+                    type="hidden"
+                    id="produtoId"
+                >
+
+
+                <div class="form-group">
+
+                    <label for="nome">
+                        Nome do produto
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nome"
+                        placeholder="Digite o nome"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="descricao">
+                        Descrição
+                    </label>
+
+                    <textarea
+                        id="descricao"
+                        placeholder="Digite a descrição"
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="custo">
+                            Custo
+                        </label>
+
+                        <input
+                            type="number"
+                            id="custo"
+                            step="0.01"
+                            min="0"
+                            placeholder="0,00"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="quantidade">
+                            Estoque
+                        </label>
+
+                        <input
+                            type="number"
+                            id="quantidade"
+                            min="0"
+                            placeholder="0"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="minimo">
+                        Estoque mínimo
+                    </label>
+
+                    <input
+                        type="number"
+                        id="minimo"
+                        min="0"
+                        placeholder="0"
+                        required
+                    >
+
+                </div>
+
+
+                <p
+                    id="produtoMensagem"
+                    class="mensagem"
+                ></p>
+
+
+                <button
+                    type="submit"
+                    class="btn-primary"
+                >
+                    Salvar Produto
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- JavaScript original dos produtos -->
+    <script src="../js/produtos.js"></script>
+
+
+    <!-- Correção do nome do usuário -->
+    <script>
+
+        const usuarioSalvo =
+            sessionStorage.getItem("usuario");
+
+
+        // Se não estiver logado,
+        // volta para a tela de login
+        if (!usuarioSalvo) {
+
+            window.location.href = "index.html";
+
+        }
+
+
+        // Converte o JSON salvo no navegador
+        // para um objeto JavaScript
+        let usuario;
+
+        try {
+
+            usuario = JSON.parse(usuarioSalvo);
+
+        } catch (erro) {
+
+            // Caso o valor esteja salvo apenas como texto
+            usuario = {
+                nome: usuarioSalvo
+            };
+
+        }
+
+
+        // Mostra SOMENTE o nome do usuário
+        document.getElementById(
+            "nomeUsuario"
+        ).textContent = usuario.nome;
+
+
+        // Função para sair
+        function logout() {
+
+            sessionStorage.removeItem("usuario");
+
+            window.location.href = "index.html";
+
+        }
+
+    </script>
+
+</body>
+
+</html>

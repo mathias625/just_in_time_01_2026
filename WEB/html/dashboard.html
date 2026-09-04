@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Just in Time - Dashboard</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+</head>
+
+<body>
+
+    <header class="header">
+
+        <div class="logo-header">
+
+            <span>JIT</span>
+
+            <div>
+
+                <h2>Just in Time</h2>
+
+                <small>
+                    Gestão de produção
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="usuario-header">
+
+            <span id="nomeUsuario">
+                Usuário
+            </span>
+
+            <button
+                id="btnLogout"
+                class="btn-logout"
+            >
+                Sair
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <main class="dashboard">
+
+        <section class="welcome">
+
+            <h1>
+                Olá,
+                <span id="usuarioNome">
+                    Usuário
+                </span>!
+            </h1>
+
+            <p>
+                Gerencie os produtos e acompanhe
+                a produção da fábrica.
+            </p>
+
+        </section>
+
+
+        <section class="cards-menu">
+
+
+            <a
+                href="produtos.html"
+                class="menu-card"
+            >
+
+                <div class="menu-icon">
+                    📦
+                </div>
+
+                <div>
+
+                    <h2>
+                        Produtos
+                    </h2>
+
+                    <p>
+                        Cadastre, edite, pesquise
+                        e exclua produtos.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+            <a
+                href="producao.html"
+                class="menu-card"
+            >
+
+                <div class="menu-icon">
+                    🏭
+                </div>
+
+                <div>
+
+                    <h2>
+                        Gestão de Produção
+                    </h2>
+
+                    <p>
+                        Controle entradas e
+                        saídas do estoque.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        // Recupera o usuário salvo no navegador
+        const usuarioSalvo =
+            sessionStorage.getItem("usuario");
+
+
+        // Se não houver usuário salvo,
+        // volta para a tela de login
+        if (!usuarioSalvo) {
+
+            window.location.href = "index.html";
+
+        }
+
+
+        // Converte o JSON para objeto
+        const usuario =
+            JSON.parse(usuarioSalvo);
+
+
+        // Mostra somente o nome do usuário
+        document.getElementById(
+            "nomeUsuario"
+        ).textContent = usuario.nome;
+
+
+        // Mostra somente o nome na saudação
+        document.getElementById(
+            "usuarioNome"
+        ).textContent = usuario.nome;
+
+
+        // Botão Sair
+        document.getElementById(
+            "btnLogout"
+        ).addEventListener(
+            "click",
+            function () {
+
+                sessionStorage.removeItem(
+                    "usuario"
+                );
+
+                window.location.href =
+                    "index.html";
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

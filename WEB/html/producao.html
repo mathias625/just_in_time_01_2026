@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Just in Time - Produção</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+</head>
+
+<body>
+
+    <header class="header">
+
+        <div class="logo-header">
+
+            <span>JIT</span>
+
+            <div>
+
+                <h2>
+                    Just in Time
+                </h2>
+
+                <small>
+                    Gestão de produção
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="usuario-header">
+
+            <span id="nomeUsuario">
+                Usuário
+            </span>
+
+            <button
+                class="btn-logout"
+                onclick="logout()"
+            >
+                Sair
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <main class="page">
+
+        <a
+            href="dashboard.html"
+            class="voltar"
+        >
+            ← Voltar
+        </a>
+
+
+        <div class="page-title">
+
+            <h1>
+                Gestão de Produção
+            </h1>
+
+            <p>
+                Controle as movimentações de
+                entrada e saída do estoque.
+            </p>
+
+        </div>
+
+
+        <section class="producao-container">
+
+            <div class="producao-form">
+
+                <h2>
+                    Nova movimentação
+                </h2>
+
+
+                <form id="producaoForm">
+
+
+                    <div class="form-group">
+
+                        <label for="produto">
+                            Produto
+                        </label>
+
+                        <select
+                            id="produto"
+                            required
+                        >
+
+                            <option value="">
+                                Selecione um produto
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Tipo de movimentação
+                        </label>
+
+
+                        <div class="radio-group">
+
+                            <label>
+
+                                <input
+                                    type="radio"
+                                    name="tipo"
+                                    value="fabricado"
+                                    checked
+                                >
+
+                                Fabricado
+
+                            </label>
+
+
+                            <label>
+
+                                <input
+                                    type="radio"
+                                    name="tipo"
+                                    value="pedido"
+                                >
+
+                                Pedido
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="quantidade">
+                            Quantidade
+                        </label>
+
+                        <input
+                            type="number"
+                            id="quantidade"
+                            min="1"
+                            placeholder="Digite a quantidade"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="data">
+                            Data da movimentação
+                        </label>
+
+                        <input
+                            type="date"
+                            id="data"
+                            required
+                        >
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="btn-primary"
+                    >
+                        Registrar movimentação
+                    </button>
+
+                </form>
+
+
+                <p
+                    id="mensagemProducao"
+                    class="mensagem"
+                ></p>
+
+            </div>
+
+            <div class="estoque">
+
+                <h2>
+                    Estoque atual
+                </h2>
+
+                <div id="listaEstoque">
+                </div>
+
+            </div>
+
+
+        </section>
+
+        <section class="table-container">
+
+            <h2>
+                Movimentações recentes
+            </h2>
+
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Produto
+                        </th>
+
+                        <th>
+                            Tipo
+                        </th>
+
+                        <th>
+                            Quantidade
+                        </th>
+
+                        <th>
+                            Data
+                        </th>
+
+                        <th>
+                            Usuário
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="listaMovimentacoes">
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+
+    <script src="../js/producao.js"></script>
+
+</body>
+
+</html>
