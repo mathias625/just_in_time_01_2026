@@ -1,4 +1,4 @@
-# ⏱ Just in Time
+# Just in Time
 
 **Sistema web para gestão de produção e controle de estoque.**
 
